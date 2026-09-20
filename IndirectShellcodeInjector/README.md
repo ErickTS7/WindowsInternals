@@ -18,7 +18,7 @@ Injeção de shellcode em processo remoto usando **Indirect Syscalls** com resol
 2. Extrai SSNs com fallback HalosGate
 3. Localiza o endereço da instrução `syscall` na ntdll
 4. Encontra o PID do processo do Notepad
-5. Executa a cadeia de injeção do shellcode via indirect syscalls das funções ntdll.dll!NtOpenProcess, NtAllocateVirtualMemory, NtWriteVirtualMemory e NtCreateThreadEx:
+5. Executa a cadeia de injeção do shellcode via indirect syscalls das funções ntdll.dll!NtOpenProcess, NtAllocateVirtualMemory, NtWriteVirtualMemory e NtCreateThreadEx
 
 ## Build
 

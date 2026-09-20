@@ -34,7 +34,7 @@ typedef struct _CLIENT_ID {
 
 // Resolver SSN das funcoes da NTDLL
 DWORD GetSSN(BYTE* pFunction) {
-	// Padr�o normal: 4C 8B D1 = mov r10, rcx
+	// Padrao normal: 4C 8B D1 = mov r10, rcx
 	if (pFunction[0] == 0x4C && pFunction[1] == 0x8B && pFunction[2] == 0xD1) {
 		std::cout << "[*] Funcao original" << std::endl;
 		return *(DWORD*)(pFunction + 4);
@@ -69,7 +69,7 @@ BYTE* GetSyscallAddress(BYTE* pFunction) {
 		}
 	}
 
-	std::cout << "[-] Erro ao obter endere�o da SYSCALL" << std::endl;
+	std::cout << "[-] Erro ao obter endereco da SYSCALL" << std::endl;
 	return NULL;
 }
 
@@ -108,19 +108,19 @@ int main() {
 
 	std::cout << "[*] Resolvendo address da SYSCALL pela NtOpenProcess" << std::endl;
 	
-	// Obter endereco da SYSCALL tentando por v�rias funcoes
+	// Obter endereco da SYSCALL tentando por varias funcoes
 	BYTE* syscallAddress = GetSyscallAddress(pNtOpenProcess);
 
 	if (!syscallAddress) {
-		std::cout << "[*] Resolvendo endere�o da SYSCALL pela NtAllocateVirtualMemory" << std::endl;
+		std::cout << "[*] Resolvendo endereco da SYSCALL pela NtAllocateVirtualMemory" << std::endl;
 		syscallAddress = GetSyscallAddress(pNtAllocateVirtualMemory);
 	}
 	if (!syscallAddress) {
-		std::cout << "[*] Resolvendo endere�o da SYSCALL pela NtWriteVirtualMemory" << std::endl;
+		std::cout << "[*] Resolvendo endereco da SYSCALL pela NtWriteVirtualMemory" << std::endl;
 		syscallAddress = GetSyscallAddress(pNtNtWriteVirtualMemory);
 	}
 	if (!syscallAddress) {
-		std::cout << "[*] Resolvendo endere�o da SYSCALL pela NtCreateThreadEx" << std::endl;
+		std::cout << "[*] Resolvendo endereco da SYSCALL pela NtCreateThreadEx" << std::endl;
 		syscallAddress = GetSyscallAddress(pNtCreateThreadEx);
 	}
 	std::cout << "[+] SYSCALL resolvida. Address: " << std::hex << (UINT_PTR)syscallAddress << std::dec << std::endl;
